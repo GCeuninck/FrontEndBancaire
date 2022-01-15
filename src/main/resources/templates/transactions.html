@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des transactions</title>
+</head>
+<body>
+
+<h1>Liste des transactions</h1>
+
+<div th:if="${not #lists.isEmpty(transactionList)}">
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Débiteur</th>
+            <th>Créditeur</th>
+            <th>Montant</th>
+        </tr>
+        <tr th:each ="transaction : ${transactionList}">
+            <td th:utext="${transaction.date}">...</td>
+            <td th:utext="${transaction.debtor.iban}">...</td>
+            <td th:utext="${transaction.creditor.iban}">...</td>
+            <td th:utext="${transaction.value}">...</td>
+        </tr>
+    </table>
+</div>
+
+<div th:if="${#lists.isEmpty(transactionList)}">
+    <td>Aucune transaction</td>
+</div>
+
+</body>
+</html>

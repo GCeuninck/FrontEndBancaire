@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Liste des comptes</h1>
+
+<div th:if="${not #lists.isEmpty(accountList)}">
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Intitulé du compte</th>
+            <th>Type</th>
+            <th>IBAN</th>
+            <th>Solde</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each ="account : ${accountList}">
+            <td th:utext="${account.ownerLastName}">...</td>
+            <td th:utext="${account.ownerFirstName}">...</td>
+            <td th:utext="${account.accountName}">...</td>
+            <td th:utext="${account.accountType}">...</td>
+            <td th:utext="${account.iban}">...</td>
+            <td th:utext="${account.balance}">...</td>
+            <td>
+                <a th:href="@{'/accounts/' + ${account.iban} + '/transactions'}">
+                    <span>Voir les transactions</span>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div th:if="${#lists.isEmpty(accountList)}">
+    <td>Aucun compte</td>
+</div>
+
+</body>
+</html>
