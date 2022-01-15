@@ -5,6 +5,7 @@ import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.AccountForm;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Enums.AccountType;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Enums.Currency;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Transaction;
+import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.TransactionForm;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Service.IAccountService;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Service.ITransactionService;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,13 @@ public class BancaireController {
         model.addAttribute("accountTypeList", AccountType.values());
         model.addAttribute("currencyList", Currency.values());
         return "addAccount";
+    }
+
+    @GetMapping(value = { "/addTransaction" })
+    public String addTransaction(Model model) {
+        model.addAttribute("transactionForm", new TransactionForm());
+        model.addAttribute("accountList", AccountService.getAllAccounts());
+        return "addTransaction";
     }
 
     @GetMapping(value = { "/accounts" })

@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<form th:action="@{'/addTransaction'}" th:method="get">
+    <input type="submit" value="Ajouter une transaction" />
+</form>
+
 <h1>Liste des transactions</h1>
 
 <div th:if="${not #lists.isEmpty(transactionList)}">
