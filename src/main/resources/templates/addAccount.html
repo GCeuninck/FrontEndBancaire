@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un compte</title>
+</head>
+<body>
+<h1>Ajouter un compte</h1>
+</body>
+
+<form th:action="@{/accounts}" th:object="${accountForm}" method="post">
+    <p>Nom : <input type="text" th:field="*{ownerLastName}" /></p>
+    <p>Prénom: <input type="text" th:field="*{ownerFirstName}" /></p>
+    <p>Intitulé du compte: <input type="text" th:field="*{accountName}" /></p>
+    <p>Type:
+        <select th:field="*{accountType}">
+            <option th:each="accountTypeEnum : ${accountTypeList}"
+                    th:value="${accountTypeEnum}" th:text="${accountTypeEnum}">
+            </option>
+        </select>
+    </p>
+    <p>IBAN: <input type="text" th:field="*{iban}" /></p>
+    <p>Solde: <input type="text" th:field="*{balance}" /></p>
+    <p>Devise:
+        <select th:field="*{currency}">
+            <option th:each="currencyEnum : ${currencyList}"
+                    th:value="${currencyEnum}" th:text="${currencyEnum}">
+            </option>
+        </select>
+    </p>
+    <p><input type="submit" value="Créer" /> </p>
+</form>
+</html>

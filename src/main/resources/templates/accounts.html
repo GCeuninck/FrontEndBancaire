@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<form th:action="@{'/addAccount'}" th:method="GET">
+    <input type="submit" value="Ajouter un compte" />
+</form>
+
 <h1>Liste des comptes</h1>
 
 <div th:if="${not #lists.isEmpty(accountList)}">
@@ -17,6 +21,7 @@
             <th>Type</th>
             <th>IBAN</th>
             <th>Solde</th>
+            <th>Devise</th>
             <th>Actions</th>
         </tr>
         <tr th:each ="account : ${accountList}">
@@ -26,10 +31,14 @@
             <td th:utext="${account.accountType}">...</td>
             <td th:utext="${account.iban}">...</td>
             <td th:utext="${account.balance}">...</td>
+            <td th:utext="${account.currency}">...</td>
             <td>
                 <a th:href="@{'/accounts/' + ${account.iban} + '/transactions'}">
                     <span>Voir les transactions</span>
                 </a>
+                <form th:action="@{'/accounts/' + ${account.iban}}" th:method="DELETE">
+                    <input type="submit" value="Supprimer" />
+                </form>
             </td>
         </tr>
     </table>

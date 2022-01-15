@@ -1,13 +1,17 @@
 package org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Controller;
 
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Account;
+import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.AccountForm;
+import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Enums.AccountType;
+import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Enums.Currency;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Transaction;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Service.IAccountService;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Service.ITransactionService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -24,6 +28,14 @@ public class BancaireController {
     @GetMapping(value = { "/" })
     public String index(Model model) {
         return "index";
+    }
+
+    @GetMapping(value = { "/addAccount" })
+    public String addAccount(Model model) {
+        model.addAttribute("accountForm", new AccountForm());
+        model.addAttribute("accountTypeList", AccountType.values());
+        model.addAttribute("currencyList", Currency.values());
+        return "addAccount";
     }
 
     @GetMapping(value = { "/accounts" })
@@ -47,10 +59,15 @@ public class BancaireController {
         return "transactions";
     }
 
-    /*@PostMapping(value = "/checkIBAN")
-    public String checkIBAN(Model model, @ModelAttribute("ibanForm") IBANForm ibanForm) {
-        IBANValidation ibanValidation = IBANService.checkIBAN(ibanForm.getIBAN());
-        model.addAttribute("iban", ibanValidation);
-        return "iban";
-    }*/
+    @DeleteMapping(value = {"/accounts/{Account_IBAN}"})
+    public String deleteAccount(Model model, @PathVariable String Account_IBAN) {
+        AccountService.deleteAccount(Account_IBAN);
+        return "redirect:/accounts";
+    }
+
+    @PostMapping(value = "/accounts")
+    public String createAccount(Model model, @ModelAttribute("accountForm") AccountForm accountForm) {
+        AccountService.createAccount(accountForm);
+        return "redirect:/accounts";
+    }
 }
