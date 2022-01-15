@@ -20,14 +20,19 @@ public class AccountService implements IAccountService {
     @Override
     public List<Account> getAllAccounts() {
         RestTemplate restTemplate = new RestTemplate();
-        List<Account> accountList = Arrays.asList(restTemplate.getForObject(URL_BACKEND + "account", Account[].class));
+        ResponseEntity<Account[]> response = restTemplate.getForEntity(URL_BACKEND + "account", Account[].class);
+        assert(response.getStatusCode() == (HttpStatus.OK));
+
+        List<Account> accountList = Arrays.asList(response.getBody());
         return accountList;
     }
 
     @Override
     public void deleteAccount(String accountIBAN) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(URL_BACKEND + "account/" + accountIBAN);
+        ResponseEntity<Void> response = restTemplate.exchange(URL_BACKEND + "account/" + accountIBAN, HttpMethod.DELETE, null, Void.class);
+
+        assert(response.getStatusCode() == (HttpStatus.ACCEPTED));
     }
 
     @Override

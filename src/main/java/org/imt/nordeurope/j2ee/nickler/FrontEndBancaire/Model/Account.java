@@ -1,6 +1,5 @@
 package org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model;
 
-import org.iban4j.Iban;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Enums.AccountType;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Enums.Currency;
 
