@@ -17,6 +17,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'javax.inject:javax.inject:1'
+	implementation 'org.springframework.integration:spring-integration-amqp'
 }
 
 test {
