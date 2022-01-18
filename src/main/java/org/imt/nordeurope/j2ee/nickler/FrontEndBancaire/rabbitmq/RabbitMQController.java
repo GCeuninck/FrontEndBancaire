@@ -29,11 +29,9 @@ public class RabbitMQController {
     @GetMapping("/publish100")
     public String publishMessage() {
 
-        // todo ??
-
+        List<Account> accountList= accountService.getAllAccounts();
 
         for(int i=0;i<100;i++){
-            List<Account> accountList= accountService.getAllAccounts();
             Transaction transaction = new Transaction();
             transaction.setCreditor(accountList.get(0));
             transaction.setDebtor(accountList.get(1));
