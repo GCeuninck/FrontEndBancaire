@@ -43,6 +43,4 @@ public class AccountService implements IAccountService {
 
         assert(response.getStatusCode() == (HttpStatus.CREATED));
     }
-
-
 }

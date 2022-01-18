@@ -10,6 +10,10 @@
     <input type="submit" value="Ajouter un compte" />
 </form>
 
+<form th:action="@{'/rabbitmq/publish100'}" th:method="get">
+    <input type="submit" value="test publish" />
+</form>
+
 <h1>Liste des comptes</h1>
 
 <div th:if="${not #lists.isEmpty(accountList)}">

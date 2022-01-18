@@ -7,6 +7,13 @@ public class Transaction {
     public Transaction() {
     }
 
+    public Transaction(Account debtor, Account creditor, Double value, Date date) {
+        this.debtor = debtor;
+        this.creditor = creditor;
+        this.value = value;
+        this.date = date;
+    }
+
     private Long id;
 
     private Account debtor;
@@ -56,4 +63,5 @@ public class Transaction {
     public void setDate(Date date) {
         this.date = date;
     }
+
 }
