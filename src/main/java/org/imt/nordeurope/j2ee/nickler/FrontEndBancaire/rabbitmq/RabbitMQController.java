@@ -28,15 +28,23 @@ public class RabbitMQController {
 
     @GetMapping("/publish100")
     public String publishMessage() {
-
+        // besoin d'avoir 2 comptes en BDD
         List<Account> accountList= accountService.getAllAccounts();
-
+        Account account1, account2;
+        account1 = accountList.get(0);
+        account2 = accountList.get(1);
         for(int i=0;i<100;i++){
             Transaction transaction = new Transaction();
-            transaction.setCreditor(accountList.get(0));
-            transaction.setDebtor(accountList.get(1));
+            if(Math.random()<=0.5){
+                transaction.setCreditor(account1);
+                transaction.setDebtor(account2);
+            }else{
+                transaction.setCreditor(account2);
+                transaction.setDebtor(account1);
+            }
+
             transaction.setDate(new Date());
-            transaction.setValue(10.0);
+            transaction.setValue(Math.random()*100);
 
             Gson gson = new Gson();
             String jsonTransaction = gson.toJson(transaction);
