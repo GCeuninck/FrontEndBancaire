@@ -10,6 +10,10 @@
     <input type="submit" value="Ajouter une transaction" />
 </form>
 
+<form th:action="@{'/rabbitmq/publish100'}" th:method="get">
+    <input type="submit" value="Simuler 100 transactions" />
+</form>
+
 <h1>Liste des transactions</h1>
 
 <div th:if="${not #lists.isEmpty(transactionList)}">
