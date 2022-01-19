@@ -28,6 +28,16 @@ public class AccountService implements IAccountService {
     }
 
     @Override
+    public Account getAccount(String accountIBAN) {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Account> response = restTemplate.exchange(URL_BACKEND + "account/" + accountIBAN, HttpMethod.GET, null, Account.class);
+
+        assert(response.getStatusCode() == (HttpStatus.OK));
+
+        return response.getBody();
+    }
+
+    @Override
     public void deleteAccount(String accountIBAN) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Void> response = restTemplate.exchange(URL_BACKEND + "account/" + accountIBAN, HttpMethod.DELETE, null, Void.class);

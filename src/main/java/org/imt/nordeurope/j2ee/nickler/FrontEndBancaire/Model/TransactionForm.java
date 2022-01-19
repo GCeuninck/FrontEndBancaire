@@ -1,30 +1,33 @@
 package org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class TransactionForm {
-    private Account debtor;
+    private String debtorIBAN;
 
-    private Account creditor;
+    private String creditorIBAN;
 
     private Double value;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
 
-    public Account getDebtor() {
-        return debtor;
+    public String getDebtorIBAN() {
+        return debtorIBAN;
     }
 
-    public void setDebtor(Account debtor) {
-        this.debtor = debtor;
+    public void setDebtorIBAN(String debtorIBAN) {
+        this.debtorIBAN = debtorIBAN;
     }
 
-    public Account getCreditor() {
-        return creditor;
+    public String getCreditorIBAN() {
+        return creditorIBAN;
     }
 
-    public void setCreditor(Account creditor) {
-        this.creditor = creditor;
+    public void setCreditorIBAN(String creditorIBAN) {
+        this.creditorIBAN = creditorIBAN;
     }
 
     public Double getValue() {

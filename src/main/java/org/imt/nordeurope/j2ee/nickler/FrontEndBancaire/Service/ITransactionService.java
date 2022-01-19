@@ -7,4 +7,5 @@ import java.util.List;
 public interface ITransactionService {
     List<Transaction> getAllTransactions();
     List<Transaction> getAllTransactionsOfAccount(String accountIBAN);
+    void createTransaction(Transaction transaction);
 }

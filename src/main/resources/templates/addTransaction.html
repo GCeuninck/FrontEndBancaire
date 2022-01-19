@@ -9,16 +9,16 @@
 
 <form th:action="@{/transactions}" th:object="${transactionForm}" method="post">
     <p>Débiteur:
-        <select th:field="*{debtor}" th:required="required">
+        <select th:field="*{debtorIBAN}" th:required="required">
             <option th:each="account : ${accountList}"
-                    th:value="${account}" th:text="${account.iban}">
+                    th:value="${account.iban}" th:text="${account.iban}">
             </option>
         </select>
     </p>
     <p>Créditeur:
-        <select th:field="*{creditor}" th:required="required">
+        <select th:field="*{creditorIBAN}" th:required="required">
             <option th:each="account : ${accountList}"
-                    th:value="${account}" th:text="${account.iban}">
+                    th:value="${account.iban}" th:text="${account.iban}">
             </option>
         </select>
     </p>
