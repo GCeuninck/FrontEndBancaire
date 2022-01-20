@@ -11,7 +11,7 @@ public class AccountForm {
 
     private String accountName;
 
-    private Double Balance;
+    private Double balance;
 
     private AccountType accountType;
 
@@ -44,11 +44,11 @@ public class AccountForm {
     }
 
     public Double getBalance() {
-        return Balance;
+        return balance;
     }
 
     public void setBalance(Double balance) {
-        Balance = balance;
+        this.balance = balance;
     }
 
     public AccountType getAccountType() {
