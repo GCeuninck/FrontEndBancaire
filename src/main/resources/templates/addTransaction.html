@@ -7,26 +7,32 @@
 <body>
 <h1>Ajouter une transaction</h1>
 
-<form th:action="@{/transactions}" th:object="${transactionForm}" method="post">
-    <p>Débiteur:
-        <select th:field="*{debtorIBAN}" th:required="required">
-            <option th:each="account : ${accountList}"
-                    th:value="${account.iban}" th:text="${account.iban}">
-            </option>
-        </select>
-    </p>
-    <p>Créditeur:
-        <select th:field="*{creditorIBAN}" th:required="required">
-            <option th:each="account : ${accountList}"
-                    th:value="${account.iban}" th:text="${account.iban}">
-            </option>
-        </select>
-    </p>
-    <p>Montant: <input type="text" th:field="*{value}" th:required="required" /></p>
-    <p>Date: <input type="date" th:field="*{date}" th:required="required" /></p>
+<div th:if="${not #lists.isEmpty(accountList)}">
+    <form th:action="@{/transactions}" th:object="${transactionForm}" method="post">
+        <p>Débiteur:
+            <select th:field="*{debtorIBAN}" th:required="required">
+                <option th:each="account : ${accountList}"
+                        th:value="${account.iban}" th:text="${account.iban}">
+                </option>
+            </select>
+        </p>
+        <p>Créditeur:
+            <select th:field="*{creditorIBAN}" th:required="required">
+                <option th:each="account : ${accountList}"
+                        th:value="${account.iban}" th:text="${account.iban}">
+                </option>
+            </select>
+        </p>
+        <p>Montant: <input type="text" th:field="*{value}" th:required="required" /></p>
+        <p>Date: <input type="date" th:field="*{date}" th:required="required" /></p>
 
-    <p><input type="submit" value="Créer" /> </p>
-</form>
+        <p><input type="submit" value="Créer" /> </p>
+    </form>
+</div>
+
+<div th:if="${#lists.isEmpty(accountList)}">
+    <td>Aucun compte disponible : Veuillez créer au moins un compte pour réaliser une transaction.</td>
+</div>
 
 </body>
 </html>

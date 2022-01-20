@@ -77,6 +77,6 @@ public class BasicSimulation extends Simulation {
           .pause(2)
           .exec(http("Delete : FR7630006000011234567890189 Account").delete("/accounts/FR7630006000011234567890189"));
   {
-    setUp(scn.injectOpen(atOnceUsers(1)).protocols(httpProtocol));
+    setUp(scn.injectOpen(atOnceUsers(5)).protocols(httpProtocol));
   }
 }
