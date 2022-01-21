@@ -22,10 +22,9 @@ import io.gatling.javaapi.http.*;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Enums.AccountType;
 import org.imt.nordeurope.j2ee.nickler.FrontEndBancaire.Model.Enums.Currency;
 
-import java.time.Duration;
-
 public class BasicSimulation extends Simulation {
 
+  FeederBuilder.FileBased<Object> ibanFeeder = jsonFile("IbanFeeder.json").circular();
   HttpProtocolBuilder httpProtocol =
       http
           // Here is the root for all relative URLs
@@ -37,6 +36,7 @@ public class BasicSimulation extends Simulation {
           .acceptEncodingHeader("gzip, deflate")
           .userAgentHeader(
               "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0");
+
 
   // A scenario is a chain of requests and pauses
   ScenarioBuilder scn =
@@ -55,7 +55,18 @@ public class BasicSimulation extends Simulation {
                           .formParam("balance", "50")
                           .formParam("accountType", AccountType.CURRENT)
                           .formParam("currency", Currency.EURO)
-                          .formParam("iban", "FR7630006000011234567890189"))
+                          .formParam("iban", ibanFeeder))
+          .pause(7)
+          .exec(
+                  http("Post : Account Creation Operation")
+                          .post("/accounts")
+                          .formParam("ownerLastName", "GatlingLastName2")
+                          .formParam("ownerFirstName", "GatlingFirstName2")
+                          .formParam("accountName", "GatlingName2")
+                          .formParam("balance", "50")
+                          .formParam("accountType", AccountType.CURRENT)
+                          .formParam("currency", Currency.EURO)
+                          .formParam("iban", ibanFeeder))
           .pause(7)
           .exec(
                   http("Post : Transaction Creation Operation")
@@ -77,6 +88,6 @@ public class BasicSimulation extends Simulation {
           .pause(2)
           .exec(http("Delete : FR7630006000011234567890189 Account").delete("/accounts/FR7630006000011234567890189"));
   {
-    setUp(scn.injectOpen(atOnceUsers(5)).protocols(httpProtocol));
+    setUp(scn.injectOpen(atOnceUsers(1)).protocols(httpProtocol));
   }
 }
