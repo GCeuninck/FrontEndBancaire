@@ -14,7 +14,7 @@ class PublishMessagesSimulationScala extends Simulation {
     .acceptLanguageHeader("en-US,en;q=0.5")
     .acceptEncodingHeader("gzip, deflate")
     .userAgentHeader("Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0")
-  val scn = scenario("Delete Account Front End Bancaire")
+  val scn = scenario("Publish 100 Transactions Front End Bancaire")
     .exec(http("Get : Publish 100 Transactions").get("/rabbitmq/publish100"))
   setUp( // 11
     scn.inject(atOnceUsers(4)) // 12
