@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'io.gatling.gradle' version "3.7.3"
 	id 'java'
+	id 'scala'
 }
 
 group = 'org.imt.nordeurope.j2ee.nickler'
